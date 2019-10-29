@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>AngularDynamicLoader</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="styles.3ff695c00d717f2d2a11.css"></head>
+
+<body>
+  <app-root></app-root>
+  <div id="container"></div>
+  <div>
+    <label for="sel"></label>
+    <select name="sel" id="sel">
+      <option value="hello">Hello</option>
+      <option value="app-form">Form</option>
+    </select>
+    <button onclick="insert()">Submit</button>
+  </div>
+<script src="runtime-es2015.e8a2810b3b08d6a1b6aa.js" type="module"></script><script src="runtime-es5.e8a2810b3b08d6a1b6aa.js" nomodule defer></script><script src="polyfills-es5.2b9ce34c123ac007a8ba.js" nomodule defer></script><script src="polyfills-es2015.0ef207fb7b4761464817.js" type="module"></script><script src="main-es2015.664da41709498b613ac5.js" type="module"></script><script src="main-es5.664da41709498b613ac5.js" nomodule defer></script></body>
+<script>
+  let insertCount = 0;
+
+  function insert() {
+    inject(document.getElementById('sel').value);
+  }
+
+  function inject(componentSelector) {
+    console.log(componentSelector)
+    const container = document.getElementById('container');
+    container.innerHTML = '';
+    const root = document.createElement('ng-element');
+    container.appendChild(root);
+
+    loadNgComponent(root, componentSelector, instance => {
+      instance.count = insertCount++;
+    });
+  }
+</script>
+
+</html>
